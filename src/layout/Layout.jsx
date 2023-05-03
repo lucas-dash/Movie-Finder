@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 // rrd
 import { Outlet } from 'react-router-dom';
 // layers cmp
@@ -10,7 +9,7 @@ const Layout = () => {
   return (
     <>
       <TopBar />
-      <SideBar />
+      {/* <SideBar /> */}
       <main>
         <Outlet />
       </main>

@@ -46,7 +46,7 @@ export const themeSettings = (mode) => {
               dark: '#151515',
             },
             background: {
-              default: '#F8FEF5',
+              default: '#F8F8F8',
             },
             text: {
               primary: '#16181E',
