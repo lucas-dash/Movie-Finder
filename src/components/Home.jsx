@@ -1,4 +1,12 @@
-import { Stack, Box, Button, Typography, Container } from '@mui/material';
+import {
+  Stack,
+  Box,
+  Button,
+  Typography,
+  Container,
+  Card,
+  Paper,
+} from '@mui/material';
 
 const Home = () => {
   return (
@@ -16,7 +24,7 @@ const Home = () => {
             py: 0,
           }}
         >
-          <Typography variant="h6" color={'text.primary'} fontWeight={600}>
+          <Typography variant="body1" color={'text.primary'} fontWeight={600}>
             Movie
           </Typography>
         </Button>
@@ -30,16 +38,18 @@ const Home = () => {
             py: 0,
           }}
         >
-          <Typography variant="h6" color={'text.primary'} fontWeight={600}>
+          <Typography variant="body1" color={'text.primary'} fontWeight={600}>
             Tv Shows
           </Typography>
         </Button>
       </Stack>
 
       <Container maxWidth="lg">
-        <Box></Box>
-
-        <Typography variant="h1">Hello World</Typography>
+        <Box>
+          <Paper elevation={2} sx={{ border: '1px solid #fff' }}>
+            <Typography variant="h1">Hello World</Typography>
+          </Paper>
+        </Box>
       </Container>
     </>
   );

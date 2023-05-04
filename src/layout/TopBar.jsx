@@ -21,19 +21,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectTheme } from '../features/theme';
 import { toggleTheme } from '../features/theme';
 // rrd
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const TopBar = () => {
+const TopBar = ({ open }) => {
   const colorMode = useSelector(selectTheme);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const changeColorTheme = () => {
     dispatch(toggleTheme());
   };
 
   const matches = useMediaQuery('(max-width:632px)');
-
-  // navigate
 
   // search component
 
@@ -55,7 +54,7 @@ const TopBar = () => {
           <Tooltip title="Menu">
             <IconButton
               aria-label="show menu"
-              onClick={() => {}}
+              onClick={open}
               sx={{ color: 'secondary.main' }}
             >
               <MenuRoundedIcon fontSize="large" />
@@ -73,7 +72,9 @@ const TopBar = () => {
               <IconButton
                 size="10"
                 aria-label="Go back"
-                onClick={() => {}}
+                onClick={() => {
+                  navigate(-1);
+                }}
                 sx={{
                   '&:hover':
                     colorMode === 'dark'
@@ -88,7 +89,9 @@ const TopBar = () => {
             <Tooltip title="Go Forward">
               <IconButton
                 aria-label="Go forward"
-                onClick={() => {}}
+                onClick={() => {
+                  navigate(1);
+                }}
                 sx={{
                   color: 'darkAccent.light',
                   '&:hover':
