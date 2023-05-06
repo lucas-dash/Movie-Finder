@@ -1,17 +1,17 @@
 import { useGetMoviePopularQuery } from '../../api/movieApi';
 import { Box } from '@mui/material';
-import ListItem from './ListItem';
+import ListSlider from '../ListSlider';
 
 const MovieList = () => {
   const { data: popularMovie, isLoading: popularLoad } =
     useGetMoviePopularQuery();
 
   return (
-    <Box>
-      <ListItem
+    <Box my={2}>
+      <ListSlider
         loading={popularLoad}
         dataList={popularMovie?.results}
-        listName={'Top 10 Today'}
+        listName={'Popular'}
       />
     </Box>
   );

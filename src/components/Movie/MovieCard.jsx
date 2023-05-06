@@ -1,7 +1,7 @@
 import { Card, Box, Typography, CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const MovieCard = ({ title, img, movieId, index }) => {
+const MovieCard = ({ title, img, movieId }) => {
   return (
     <Link
       to={`/movies/${movieId}`}
@@ -15,25 +15,23 @@ const MovieCard = ({ title, img, movieId, index }) => {
           transition: 'all ease 150ms',
         }}
       >
-        <Card
-          variant="elevation"
-          elevation={6}
-          sx={{
-            transition: 'all ease-in 150ms',
-            width: 225,
-            height: 120,
-            mr: '5px',
-            overflow: 'hidden',
-          }}
-        >
+        <Card variant="elevation" elevation={6}>
           <CardMedia
             component={'img'}
             image={`https://image.tmdb.org/t/p/w500${img}`}
             alt={title}
-            sx={{ objectFit: 'cover' }}
+            sx={{
+              objectFit: 'cover',
+              height: '100%',
+              width: '100%',
+            }}
           />
         </Card>
-        <Box sx={{ width: 225, textAlign: 'center' }}>
+        <Box
+          sx={{
+            textAlign: 'center',
+          }}
+        >
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
             {title}
           </Typography>

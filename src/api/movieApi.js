@@ -1,6 +1,6 @@
 // RTK Query
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import key from '../config';
+import key from '../../config';
 
 const API_KEY = key.API_KEY;
 
