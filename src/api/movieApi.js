@@ -19,6 +19,15 @@ export const tmdbApi = createApi({
     getMovieDetails: builder.query({
       query: (movieId) => `movie/${movieId}?api_key=${API_KEY}`,
     }),
+    getMoviesUpcoming: builder.query({
+      query: () => `movie/upcoming?api_key=${API_KEY}`,
+    }),
+    getTvPopular: builder.query({
+      query: () => `tv/popular?api_key=${API_KEY}&language=en-US`,
+    }),
+    getTvTopRated: builder.query({
+      query: () => `tv/top_rated?api_key=${API_KEY}`,
+    }),
   }),
 });
 
@@ -26,6 +35,9 @@ export const {
   useGetMoviePopularQuery,
   useGetMoviesGenresQuery,
   useGetMovieDetailsQuery,
+  useGetMoviesUpcomingQuery,
+  useGetTvPopularQuery,
+  useGetTvTopRatedQuery,
 } = tmdbApi;
 
 // const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';

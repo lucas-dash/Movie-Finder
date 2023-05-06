@@ -11,9 +11,10 @@ import { useMemo } from 'react';
 // features
 import { selectTheme, useTheme } from './features/theme';
 //components
-import Home from './components/Home';
-import MovieList from './components/Movie/MovieList';
-import MovieDetails from './components/Movie/MovieDetails';
+import Home from './pages/Home';
+import MovieList from './pages/MovieList';
+import TvShowList from './pages/TvShowList';
+import ListDetails from './components/Lists/ListDetails';
 
 const App = () => {
   const colorMode = useSelector(selectTheme);
@@ -35,15 +36,15 @@ const App = () => {
 
           <Route path="movies">
             <Route index element={<MovieList />} />
-            <Route path=":movieId" element={<MovieDetails />} />
+            <Route path=":movieId" element={<ListDetails />} />
           </Route>
 
-          {/* <Route path="tv-shows">
-          <Route index element={<TvShowList />} />
-          <Route path=":tvshowId" element={<TvShowDetails />} />
+          <Route path="tv-shows">
+            <Route index element={<TvShowList />} />
+            <Route path=":tvshowId" element={<ListDetails />} />
           </Route>
-          
-          <Route path="latest">
+
+          {/* <Route path="latest">
           <Route index element={<Popular />} />
           </Route>
           
@@ -53,7 +54,8 @@ const App = () => {
           
           <Route path="user">
           <Route index element={<User />} />
-        </Route> */}
+        </Route>  */}
+
           {/* 
         <Route path='*'>
           <Route index element={<Error />} />

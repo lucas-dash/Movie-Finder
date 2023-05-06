@@ -40,7 +40,7 @@ const TopBar = ({ open }) => {
     <Box
       position="static"
       component={'header'}
-      backgroundColor={'primary.main'}
+      backgroundColor={colorMode === 'dark' ? 'primary.dark' : 'primary.main'}
       px={{ xs: 0.5, sm: 3 }}
       py={0.5}
     >

@@ -23,7 +23,7 @@ export const themeSettings = (mode) => {
               dark: '#151515',
             },
             background: {
-              default: '#1E1E1E',
+              default: '#1F212A',
             },
             text: {
               primary: '#F9F9F9',

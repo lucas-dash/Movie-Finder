@@ -1,7 +1,9 @@
-import { Card, Box, Typography, CardMedia } from '@mui/material';
+// rrd
 import { Link } from 'react-router-dom';
+// MUI
+import { Card, Box, Typography, CardMedia } from '@mui/material';
 
-const MovieCard = ({ title, img, movieId }) => {
+const ListCard = ({ title, img, movieId }) => {
   return (
     <Link
       to={`/movies/${movieId}`}
@@ -10,7 +12,7 @@ const MovieCard = ({ title, img, movieId }) => {
       <Box
         sx={{
           '&:hover': {
-            transform: 'scale(1.20)',
+            transform: 'scale(1.15)',
           },
           transition: 'all ease 150ms',
         }}
@@ -18,7 +20,7 @@ const MovieCard = ({ title, img, movieId }) => {
         <Card variant="elevation" elevation={6}>
           <CardMedia
             component={'img'}
-            image={`https://image.tmdb.org/t/p/w500${img}`}
+            image={`https://image.tmdb.org/t/p/w400${img}`}
             alt={title}
             sx={{
               objectFit: 'cover',
@@ -40,4 +42,4 @@ const MovieCard = ({ title, img, movieId }) => {
     </Link>
   );
 };
-export default MovieCard;
+export default ListCard;

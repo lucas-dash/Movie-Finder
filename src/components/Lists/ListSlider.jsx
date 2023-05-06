@@ -1,7 +1,10 @@
+// react slick
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import MovieCard from './Movie/MovieCard';
+// components
+import ListCard from './ListCard';
+// MUI
 import { Box, Typography } from '@mui/material';
 
 const ListSlider = ({ loading, dataList, listName }) => {
@@ -54,11 +57,13 @@ const ListSlider = ({ loading, dataList, listName }) => {
             <p>Loading...</p>
           ) : (
             dataList.map((movie) => {
+              const title = movie.title ? movie.title : movie.name;
+
               return (
-                <MovieCard
+                <ListCard
                   key={movie.id}
-                  title={movie.title}
-                  img={movie.backdrop_path}
+                  title={title}
+                  img={movie.poster_path}
                   movieId={movie.id}
                 />
               );
