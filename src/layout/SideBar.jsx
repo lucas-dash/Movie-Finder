@@ -17,9 +17,12 @@ import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
+// RKT query
+import { useGetMoviesGenresQuery } from '../api/movieApi';
 
 const SideBar = ({ open, close }) => {
   const navigate = useNavigate();
+  const { data: movieGenres, isLoading } = useGetMoviesGenresQuery();
 
   return (
     <Drawer open={open} variant="persistent">
@@ -60,7 +63,7 @@ const SideBar = ({ open, close }) => {
 
           <ListItemButton
             onClick={() => {
-              navigate('/popular');
+              navigate('/latest');
             }}
           >
             <ListItemIcon>
@@ -81,32 +84,31 @@ const SideBar = ({ open, close }) => {
             Categories
           </Typography>
 
-          <ListItemButton
-            onClick={() => {
-              navigate('/movies/1');
-            }}
-          >
-            <ListItemText
-              primary={
-                <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                  Actions
-                </Typography>
-              }
-            />
-          </ListItemButton>
-          <ListItemButton
-            onClick={() => {
-              navigate('/movies/1');
-            }}
-          >
-            <ListItemText
-              primary={
-                <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                  Comedy
-                </Typography>
-              }
-            />
-          </ListItemButton>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            movieGenres.genres.map((genre) => {
+              return (
+                <ListItemButton
+                  onClick={() => {
+                    navigate('/movies/1');
+                  }}
+                  key={genre.id}
+                >
+                  <ListItemText
+                    primary={
+                      <Typography
+                        variant="h5"
+                        sx={{ fontWeight: 600, color: 'secondary.main' }}
+                      >
+                        {genre.name}
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              );
+            })
+          )}
         </List>
       </Box>
     </Drawer>
