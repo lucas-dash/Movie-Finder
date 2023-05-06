@@ -22,6 +22,9 @@ export const tmdbApi = createApi({
     getMoviesUpcoming: builder.query({
       query: () => `movie/upcoming?api_key=${API_KEY}`,
     }),
+    getMoviesTopRated: builder.query({
+      query: () => `movie/top_rated?api_key=${API_KEY}`,
+    }),
     getTvPopular: builder.query({
       query: () => `tv/popular?api_key=${API_KEY}&language=en-US`,
     }),
@@ -36,6 +39,7 @@ export const {
   useGetMoviesGenresQuery,
   useGetMovieDetailsQuery,
   useGetMoviesUpcomingQuery,
+  useGetMoviesTopRatedQuery,
   useGetTvPopularQuery,
   useGetTvTopRatedQuery,
 } = tmdbApi;

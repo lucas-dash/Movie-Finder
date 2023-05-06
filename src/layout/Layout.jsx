@@ -5,6 +5,7 @@ import { useState } from 'react';
 import TopBar from './TopBar';
 import SideBar from './Sidebar';
 import Footer from './Footer';
+import Header from './Header';
 
 const Layout = () => {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,7 @@ const Layout = () => {
   return (
     <>
       <TopBar open={drawerOpen} />
+      <Header />
       <SideBar open={open} close={drawerClose} />
       <main>
         <Outlet />

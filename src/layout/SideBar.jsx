@@ -15,8 +15,8 @@ import {
 } from '@mui/material';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
-import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
+import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 // RKT query
 import { useGetMoviesGenresQuery } from '../api/movieApi';
 
@@ -63,7 +63,7 @@ const SideBar = ({ open, close }) => {
 
           <ListItemButton
             onClick={() => {
-              navigate('/latest');
+              navigate('/popular');
             }}
           >
             <ListItemIcon>

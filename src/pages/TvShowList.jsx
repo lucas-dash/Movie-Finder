@@ -3,10 +3,9 @@ import ListSlider from '../components/Lists/ListSlider';
 import { useGetTvPopularQuery, useGetTvTopRatedQuery } from '../api/movieApi';
 
 const TvShowList = () => {
-  const { data: popularTV, isLoading: popularLoad } = useGetTvPopularQuery();
+  const { data: popularTv, isLoading: popularLoad } = useGetTvPopularQuery();
   const { data: topRatedTv, isLoading: topRatedLoad } = useGetTvTopRatedQuery();
 
-  console.log(popularTV);
   return (
     <Box my={2}>
       <ListSlider
@@ -16,7 +15,7 @@ const TvShowList = () => {
       />
       <ListSlider
         loading={popularLoad}
-        dataList={popularTV?.results}
+        dataList={popularTv?.results}
         listName={'Popular TV Shows'}
       />
     </Box>
