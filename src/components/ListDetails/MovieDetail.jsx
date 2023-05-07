@@ -5,7 +5,7 @@ import HourglassEmptyRoundedIcon from '@mui/icons-material/HourglassEmptyRounded
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
 
-const DetailsInfo = ({ release, runtime, revenue, genres, overview }) => {
+const MovieDetail = ({ release, runtime, revenue, genres, overview }) => {
   const moneyFormat = new Intl.NumberFormat('en', { notation: 'compact' });
   const dateFormat = new Intl.DateTimeFormat('en-GB', {
     year: 'numeric',
@@ -95,4 +95,4 @@ const DetailsInfo = ({ release, runtime, revenue, genres, overview }) => {
     </Box>
   );
 };
-export default DetailsInfo;
+export default MovieDetail;

@@ -10,7 +10,7 @@ import {
 // MUI
 import { Box, Typography } from '@mui/material';
 import DetailGallery from './DetailGallery';
-import DetailsInfo from './DetailsInfo';
+import MovieDetail from './MovieDetail';
 import DetailHeader from './DetailHeader';
 import TvShowDetail from './TvShowDetail';
 
@@ -43,7 +43,7 @@ const ListDetails = () => {
           {detailsLoad ? (
             <p>Loading..</p>
           ) : (
-            <DetailsInfo
+            <MovieDetail
               release={details.release_date}
               runtime={details.runtime}
               revenue={details.revenue}
