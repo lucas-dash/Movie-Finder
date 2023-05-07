@@ -10,6 +10,10 @@ body,
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+body {
+  transition: all ease-in 300ms;
+}
+
 /* .app {
   display: flex;
   position: relative;

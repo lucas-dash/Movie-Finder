@@ -1,14 +1,17 @@
 // rrd
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 // MUI
 import { Card, Box, Typography, CardMedia } from '@mui/material';
 
 const ListCard = ({ title, img, movieId }) => {
+  const location = useLocation();
+
+  const path = location.pathname.includes('/tv-shows')
+    ? `/tv-shows/${movieId}`
+    : `/movies/${movieId}`;
+
   return (
-    <Link
-      to={`/movies/${movieId}`}
-      style={{ textDecoration: 'none', color: 'inherit' }}
-    >
+    <Link to={path} style={{ textDecoration: 'none', color: 'inherit' }}>
       <Box
         sx={{
           '&:hover': {

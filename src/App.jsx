@@ -14,7 +14,7 @@ import { selectTheme, useTheme } from './features/theme';
 import Home from './pages/Home';
 import MovieList from './pages/MovieList';
 import TvShowList from './pages/TvShowList';
-import ListDetails from './components/Lists/ListDetails';
+import ListDetails from './components/ListDetails/ListDetails';
 import NotFound from './pages/NotFound';
 import Popular from './components/Popular';
 

@@ -19,6 +19,9 @@ export const tmdbApi = createApi({
     getMovieDetails: builder.query({
       query: (movieId) => `movie/${movieId}?api_key=${API_KEY}`,
     }),
+    getMovieImages: builder.query({
+      query: (movieId) => `movie/${movieId}/images?api_key=${API_KEY}`,
+    }),
     getMoviesUpcoming: builder.query({
       query: () => `movie/upcoming?api_key=${API_KEY}`,
     }),
@@ -31,6 +34,12 @@ export const tmdbApi = createApi({
     getTvTopRated: builder.query({
       query: () => `tv/top_rated?api_key=${API_KEY}`,
     }),
+    getTvDetails: builder.query({
+      query: (tvshowId) => `tv/${tvshowId}?api_key=${API_KEY}`,
+    }),
+    getTvImages: builder.query({
+      query: (tvshowId) => `tv/${tvshowId}/images?api_key=${API_KEY}`,
+    }),
   }),
 });
 
@@ -38,10 +47,13 @@ export const {
   useGetMoviePopularQuery,
   useGetMoviesGenresQuery,
   useGetMovieDetailsQuery,
+  useGetMovieImagesQuery,
   useGetMoviesUpcomingQuery,
   useGetMoviesTopRatedQuery,
   useGetTvPopularQuery,
   useGetTvTopRatedQuery,
+  useGetTvDetailsQuery,
+  useGetTvImagesQuery,
 } = tmdbApi;
 
 // const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
