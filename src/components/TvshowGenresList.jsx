@@ -1,14 +1,14 @@
 import { useParams } from 'react-router-dom';
 import {
-  useGetMoviesByGenreQuery,
-  useGetMoviesByGenrePage2Query,
-  useGetMoviesGenresQuery,
+  useGetTvByGenreQuery,
+  useGetTvByGenrePage2Query,
+  useGetTvGenresQuery,
 } from '../api/movieApi';
 import { Box, Button, Grid, Skeleton, Stack, Typography } from '@mui/material';
 import ListCard from './Lists/ListCard';
 import { useEffect, useState } from 'react';
 
-const GenresList = () => {
+const TvshowGenresList = () => {
   const [load, setLoad] = useState(false);
   const { genreId } = useParams();
 
@@ -17,16 +17,15 @@ const GenresList = () => {
   }, [genreId]);
 
   const {
-    data: genreMovie,
+    data: genreTv,
     isLoading: genreLoad,
     isError: genreErr,
-  } = useGetMoviesByGenreQuery(genreId);
+  } = useGetTvByGenreQuery(genreId);
 
-  const { data: genreList, isLoading: genreListLoad } =
-    useGetMoviesGenresQuery();
+  const { data: genreList, isLoading: genreListLoad } = useGetTvGenresQuery();
 
   const { data: genreListPage2, isLoading: loadPage2 } =
-    useGetMoviesByGenrePage2Query(genreId);
+    useGetTvByGenrePage2Query(genreId);
 
   const loadMore = () => {
     setLoad(true);
@@ -68,7 +67,7 @@ const GenresList = () => {
             justifyContent={'center'}
           >
             <ListCard
-              title={movie.title}
+              title={movie.name}
               img={movie.poster_path}
               movieId={movie.id}
             />
@@ -102,7 +101,7 @@ const GenresList = () => {
           ml={2}
           mb={3}
         >
-          {`${titleGenre.name} movies`}
+          {`${titleGenre.name} tv shows`}
         </Typography>
       </Box>
       <Grid container gap={4} justifyContent={'center'}>
@@ -119,11 +118,11 @@ const GenresList = () => {
             </Grid>
           </>
         ) : (
-          genreMovie.results.map((movie) => {
+          genreTv.results.map((tvshow) => {
             return (
               <Grid
                 item
-                key={movie.id}
+                key={tvshow.id}
                 xs={10}
                 sm={3}
                 md={3}
@@ -131,9 +130,9 @@ const GenresList = () => {
                 justifyContent={'center'}
               >
                 <ListCard
-                  title={movie.title}
-                  img={movie.poster_path}
-                  movieId={movie.id}
+                  title={tvshow.name}
+                  img={tvshow.poster_path}
+                  movieId={tvshow.id}
                 />
               </Grid>
             );
@@ -158,4 +157,4 @@ const GenresList = () => {
     </Box>
   );
 };
-export default GenresList;
+export default TvshowGenresList;

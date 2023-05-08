@@ -17,7 +17,8 @@ import TvShowList from './pages/TvShowList';
 import ListDetails from './components/ListDetails/ListDetails';
 import NotFound from './pages/NotFound';
 import Popular from './components/Popular';
-import GenresList from './components/GenresList';
+import MovieGenresList from './components/MovieGenresList';
+import TvshowGenresList from './components/TvshowGenresList';
 
 const App = () => {
   const colorMode = useSelector(selectTheme);
@@ -55,8 +56,12 @@ const App = () => {
             <Route index element={<Popular />} />
           </Route>
 
-          <Route path="genres">
-            <Route path=":genreId" element={<GenresList />} />
+          <Route path="movie-genres">
+            <Route path=":genreId" element={<MovieGenresList />} />
+          </Route>
+
+          <Route path="tv-show-genres">
+            <Route path=":genreId" element={<TvshowGenresList />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

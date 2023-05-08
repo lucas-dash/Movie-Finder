@@ -12,17 +12,30 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon,
+  Button,
+  Skeleton,
 } from '@mui/material';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 // RKT query
-import { useGetMoviesGenresQuery } from '../api/movieApi';
+import { useGetMoviesGenresQuery, useGetTvGenresQuery } from '../api/movieApi';
+import { useState } from 'react';
 
 const SideBar = ({ open, close }) => {
   const navigate = useNavigate();
-  const { data: movieGenres, isLoading } = useGetMoviesGenresQuery();
+  const [selectedGenre, setSelectedGenre] = useState('movie');
+  const { data: movieGenres, isLoading: movieGenreLoad } =
+    useGetMoviesGenresQuery();
+  const { data: tvGenres, isLoading: tvshowGenreLoad } = useGetTvGenresQuery();
+
+  const changeGenreToMovie = () => {
+    setSelectedGenre('movie');
+  };
+  const changeGenreToTv = () => {
+    setSelectedGenre('tvshow');
+  };
 
   return (
     <Drawer open={open} variant="persistent">
@@ -87,14 +100,92 @@ const SideBar = ({ open, close }) => {
             Categories
           </Typography>
 
-          {isLoading ? (
-            <p>Loading...</p>
+          <Stack
+            direction={'row'}
+            justifyContent={'space-evenly'}
+            gap={0}
+            my={2}
+          >
+            <Button
+              aria-label="show movie genre"
+              onClick={changeGenreToMovie}
+              sx={{
+                borderRadius: 5,
+                p: 0.5,
+                border: '1px solid',
+                borderColor: 'secondary.dark',
+                backgroundColor:
+                  selectedGenre === 'movie' ? 'secondary.light' : '',
+                color:
+                  selectedGenre === 'movie' ? 'darkAccent.main' : 'inherit',
+                '&:hover': {
+                  borderColor: 'secondary.light',
+                  color: 'secondary.main',
+                },
+              }}
+            >
+              <Typography paragraph sx={{ fontWeight: 600, m: 0 }}>
+                Movie
+              </Typography>
+            </Button>
+            <Button
+              aria-label="show tv show genre"
+              onClick={changeGenreToTv}
+              sx={{
+                borderRadius: 5,
+                p: 0.5,
+                border: '1px solid',
+                borderColor: 'secondary.light',
+                backgroundColor:
+                  selectedGenre === 'tvshow' ? 'secondary.main' : '',
+                color:
+                  selectedGenre === 'tvshow' ? 'darkAccent.main' : 'inherit',
+                '&:hover': {
+                  borderColor: 'secondary.light',
+                  color: 'secondary.main',
+                },
+              }}
+            >
+              <Typography paragraph sx={{ fontWeight: 600, m: 0 }}>
+                Tv Show
+              </Typography>
+            </Button>
+          </Stack>
+
+          {selectedGenre === 'movie' ? (
+            movieGenreLoad ? (
+              <Skeleton variant="text" height={50} width={'100%'} />
+            ) : (
+              movieGenres.genres.map((genre) => {
+                return (
+                  <ListItemButton
+                    onClick={() => {
+                      navigate(`movie-genres/${genre.id}`);
+                    }}
+                    key={genre.id}
+                  >
+                    <ListItemText
+                      primary={
+                        <Typography
+                          variant="h5"
+                          sx={{ fontWeight: 600, color: 'secondary.main' }}
+                        >
+                          {genre.name}
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                );
+              })
+            )
+          ) : tvshowGenreLoad ? (
+            <Skeleton variant="text" height={50} width={'100%'} />
           ) : (
-            movieGenres.genres.map((genre) => {
+            tvGenres.genres.map((genre) => {
               return (
                 <ListItemButton
                   onClick={() => {
-                    navigate(`genres/${genre.id}`);
+                    navigate(`tv-show-genres/${genre.id}`);
                   }}
                   key={genre.id}
                 >

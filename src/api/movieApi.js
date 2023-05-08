@@ -28,6 +28,9 @@ export const tmdbApi = createApi({
     getMoviesTopRated: builder.query({
       query: () => `movie/top_rated?api_key=${API_KEY}`,
     }),
+    getTvGenres: builder.query({
+      query: () => `genre/tv/list?api_key=${API_KEY}`,
+    }),
     getTvPopular: builder.query({
       query: () => `tv/popular?api_key=${API_KEY}&language=en-US`,
     }),
@@ -48,6 +51,14 @@ export const tmdbApi = createApi({
       query: (genresId) =>
         `/discover/movie/?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
     }),
+    getTvByGenre: builder.query({
+      query: (genresId) =>
+        `/discover/tv?api_key=${API_KEY}&with_genres=${genresId}`,
+    }),
+    getTvByGenrePage2: builder.query({
+      query: (genresId) =>
+        `/discover/tv?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
+    }),
   }),
 });
 
@@ -58,12 +69,15 @@ export const {
   useGetMovieImagesQuery,
   useGetMoviesUpcomingQuery,
   useGetMoviesTopRatedQuery,
+  useGetTvGenresQuery,
   useGetTvPopularQuery,
   useGetTvTopRatedQuery,
   useGetTvDetailsQuery,
   useGetTvImagesQuery,
   useGetMoviesByGenreQuery,
   useGetMoviesByGenrePage2Query,
+  useGetTvByGenreQuery,
+  useGetTvByGenrePage2Query,
 } = tmdbApi;
 
 // const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
