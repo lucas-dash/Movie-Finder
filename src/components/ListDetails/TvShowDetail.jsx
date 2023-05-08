@@ -111,7 +111,7 @@ const TvShowDetail = ({
         </Grid>
       </Grid>
 
-      <Box mx={2}>
+      <Box m={2}>
         {seasons.map((season) => {
           return (
             <Accordion

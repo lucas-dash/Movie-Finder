@@ -83,6 +83,7 @@ const ListDetails = () => {
             <p>Loading..</p>
           ) : (
             <TvShowDetail
+              tvshowId={tvshowId}
               release={details.first_air_date}
               episodeRuntime={details.episode_run_time[0]}
               numSeasons={details.number_of_seasons}

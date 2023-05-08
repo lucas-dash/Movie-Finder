@@ -30,9 +30,12 @@ const SideBar = ({ open, close }) => {
         <Stack
           direction={'row'}
           alignItems={'center'}
-          justifyContent={'end'}
+          justifyContent={'space-between'}
           p={1}
         >
+          <Typography variant="h4" color={'secondary'} fontWeight={600}>
+            Movie Finder
+          </Typography>
           <IconButton aria-label="Close Sidebar" onClick={close}>
             <ChevronLeftRoundedIcon />
           </IconButton>
