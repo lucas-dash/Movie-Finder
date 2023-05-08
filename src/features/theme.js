@@ -87,14 +87,24 @@ export const useTheme = (mode) => {
   return createTheme(themeSettings(mode));
 };
 
+const getInitialTheme = () => {
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'dark' || storedTheme === 'light') {
+    return storedTheme;
+  }
+  return 'dark'; // default to dark theme if no theme is stored
+};
+
 const themeSlice = createSlice({
   name: 'theme',
   initialState: {
-    theme: 'dark',
+    theme: getInitialTheme(),
   },
   reducers: {
     toggleTheme: (state) => {
-      state.theme = state.theme === 'light' ? 'dark' : 'light';
+      const newTheme = state.theme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+      state.theme = newTheme;
     },
   },
 });

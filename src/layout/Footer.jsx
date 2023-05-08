@@ -1,12 +1,22 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import footerTheme from '../assets/footerTheme.svg';
 
 const Footer = () => {
   return (
     <Box
       component={'footer'}
-      sx={{ position: 'relative', bottom: 0, left: 0, right: 0 }}
+      sx={{
+        position: 'relative',
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}
     >
-      <Typography variant="body1">Hello Footer</Typography>
+      <img
+        src={footerTheme}
+        alt="wawe footer"
+        style={{ margin: 0, padding: 0 }}
+      />
     </Box>
   );
 };
