@@ -38,7 +38,7 @@ const ListDetails = () => {
           alignItems={'start'}
         >
           {detailsLoad ? (
-            <Skeleton variant="text" />
+            <Skeleton variant="text" width={200} height={40} sx={{ ml: 3 }} />
           ) : (
             <DetailHeader title={details.title} />
           )}
@@ -145,9 +145,11 @@ const ListDetails = () => {
           flexDirection={'column'}
           alignItems={'start'}
         >
-          <Typography variant="h2" ml={3} my={2} fontWeight={500}>
-            {details?.name}
-          </Typography>
+          {detailsLoad ? (
+            <Skeleton variant="text" width={200} height={40} sx={{ ml: 3 }} />
+          ) : (
+            <DetailHeader title={details.name} />
+          )}
           <DetailGallery loading={imagesLoad} images={images} />
 
           {detailsLoad ? (
