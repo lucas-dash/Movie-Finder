@@ -8,7 +8,7 @@ import {
   useGetTvImagesQuery,
 } from '../../api/movieApi';
 // MUI
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Skeleton, Typography } from '@mui/material';
 import DetailGallery from './DetailGallery';
 import MovieDetail from './MovieDetail';
 import DetailHeader from './DetailHeader';
@@ -37,11 +37,82 @@ const ListDetails = () => {
           flexDirection={'column'}
           alignItems={'start'}
         >
-          <DetailHeader title={details?.title} />
+          {detailsLoad ? (
+            <Skeleton variant="text" />
+          ) : (
+            <DetailHeader title={details.title} />
+          )}
           <DetailGallery loading={imagesLoad} images={images} />
 
           {detailsLoad ? (
-            <p>Loading..</p>
+            <>
+              <Grid
+                container
+                spacing={2}
+                justifyContent={'center'}
+                alignItems={'center'}
+              >
+                <Grid item xs={6} sm={3}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                    gap={1}
+                  >
+                    <Box display={'flex'} gap={0.5} alignItems={'center'}>
+                      <Skeleton variant="circular" width={20} height={20} />
+                      <Skeleton variant="text" width={80} height={20} />
+                    </Box>
+                    <Skeleton variant="text" width={80} height={20} />
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                    gap={1}
+                  >
+                    <Box display={'flex'} gap={0.5} alignItems={'center'}>
+                      <Skeleton variant="circular" width={20} height={20} />
+                      <Skeleton variant="text" width={80} height={20} />
+                    </Box>
+                    <Skeleton variant="text" width={80} height={20} />
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                    gap={1}
+                  >
+                    <Box display={'flex'} gap={0.5} alignItems={'center'}>
+                      <Skeleton variant="circular" width={20} height={20} />
+                      <Skeleton variant="text" width={80} height={20} />
+                    </Box>
+                    <Skeleton variant="text" width={80} height={20} />
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                    gap={1}
+                  >
+                    <Box display={'flex'} gap={0.5} alignItems={'center'}>
+                      <Skeleton variant="circular" width={20} height={20} />
+                      <Skeleton variant="text" width={80} height={20} />
+                    </Box>
+                    <Skeleton variant="text" width={80} height={20} />
+                  </Box>
+                </Grid>
+              </Grid>
+              <Box mx={3} my={3}>
+                <Skeleton variant="rectangular" width={'100%'} height={100} />
+              </Box>
+            </>
           ) : (
             <MovieDetail
               release={details.release_date}
@@ -80,7 +151,74 @@ const ListDetails = () => {
           <DetailGallery loading={imagesLoad} images={images} />
 
           {detailsLoad ? (
-            <p>Loading..</p>
+            <>
+              <Grid
+                container
+                spacing={2}
+                justifyContent={'center'}
+                alignItems={'center'}
+              >
+                <Grid item xs={6} sm={3}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                    gap={1}
+                  >
+                    <Box display={'flex'} gap={0.5} alignItems={'center'}>
+                      <Skeleton variant="circular" width={20} height={20} />
+                      <Skeleton variant="text" width={80} height={20} />
+                    </Box>
+                    <Skeleton variant="text" width={80} height={20} />
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                    gap={1}
+                  >
+                    <Box display={'flex'} gap={0.5} alignItems={'center'}>
+                      <Skeleton variant="circular" width={20} height={20} />
+                      <Skeleton variant="text" width={80} height={20} />
+                    </Box>
+                    <Skeleton variant="text" width={80} height={20} />
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                    gap={1}
+                  >
+                    <Box display={'flex'} gap={0.5} alignItems={'center'}>
+                      <Skeleton variant="circular" width={20} height={20} />
+                      <Skeleton variant="text" width={80} height={20} />
+                    </Box>
+                    <Skeleton variant="text" width={80} height={20} />
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'center'}
+                    gap={1}
+                  >
+                    <Box display={'flex'} gap={0.5} alignItems={'center'}>
+                      <Skeleton variant="circular" width={20} height={20} />
+                      <Skeleton variant="text" width={80} height={20} />
+                    </Box>
+                    <Skeleton variant="text" width={80} height={20} />
+                  </Box>
+                </Grid>
+              </Grid>
+              <Box mx={3} my={3}>
+                <Skeleton variant="rectangular" width={'100%'} height={100} />
+              </Box>
+            </>
           ) : (
             <TvShowDetail
               tvshowId={tvshowId}

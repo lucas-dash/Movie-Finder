@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 // components
 import ListCard from './ListCard';
 // MUI
-import { Box, Typography } from '@mui/material';
+import { Box, Skeleton, Typography } from '@mui/material';
 
 const ListSlider = ({ loading, dataList, listName }) => {
   const settings = {
@@ -54,7 +54,7 @@ const ListSlider = ({ loading, dataList, listName }) => {
       <div className="slider">
         <Slider {...settings}>
           {loading ? (
-            <p>Loading...</p>
+            <Skeleton variant="rounded" height={300} width={200} />
           ) : (
             dataList.map((movie) => {
               const title = movie.title ? movie.title : movie.name;

@@ -6,6 +6,7 @@ import {
   Card,
   CardMedia,
   useMediaQuery,
+  Skeleton,
 } from '@mui/material';
 // react
 import { useState } from 'react';
@@ -37,7 +38,12 @@ const DetailGallery = ({ loading, images }) => {
       <Grid item>
         <Card>
           {loading ? (
-            <p>Loadding...</p>
+            <Skeleton
+              variant="rounded"
+              height={500}
+              width={300}
+              sx={{ mb: 2 }}
+            />
           ) : (
             <CardMedia
               component={'img'}
@@ -53,7 +59,11 @@ const DetailGallery = ({ loading, images }) => {
       <Grid item>
         <ImageList variant="masonry" cols={imgCols} rowHeight={130}>
           {loading ? (
-            <p>Loading...</p>
+            <ImageListItem cols={4} rows={1}>
+              <Skeleton variant="rounded" width={90} height={120} />
+              <Skeleton variant="rounded" width={90} height={120} />
+              <Skeleton variant="rounded" width={90} height={120} />
+            </ImageListItem>
           ) : (
             images?.posters?.slice(0, 12).map((image, index) => {
               return (
