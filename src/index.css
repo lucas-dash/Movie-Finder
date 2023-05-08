@@ -3,7 +3,6 @@
 html,
 body,
 #root,
-.app,
 .content {
   height: 100%;
   width: 100%;
@@ -14,10 +13,10 @@ body {
   transition: all ease-in 300ms;
 }
 
-/* .app {
-  display: flex;
-  position: relative;
-} */
+.activeLink {
+  background-color: #0ea5e9;
+  border-radius: 50px;
+}
 
 .slider {
   width: 90%;

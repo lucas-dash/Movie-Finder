@@ -94,7 +94,7 @@ const SideBar = ({ open, close }) => {
               return (
                 <ListItemButton
                   onClick={() => {
-                    navigate('/movies/1');
+                    navigate(`genres/${genre.id}`);
                   }}
                   key={genre.id}
                 >

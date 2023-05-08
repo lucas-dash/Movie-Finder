@@ -1,5 +1,5 @@
 // rrd
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 // MUI
 import { Stack, Button, Typography } from '@mui/material';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
@@ -16,37 +16,11 @@ const Header = () => {
       mx={{ xs: 0, sm: 5 }}
       justifyContent={{ xs: 'center', sm: 'start' }}
     >
-      {/* <Link to={'/'}>
-        <Button
-          aria-label="Browse Movies"
-          sx={{
-            border: '2px solid',
-            borderColor: 'secondary.dark',
-            borderRadius: 50,
-            px: 1.5,
-            py: 0,
-            transition: 'all ease-out 200ms',
-            '&:hover': {
-              transform: 'scale(1.10)',
-            },
-          }}
-        >
-          <ExploreOutlinedIcon
-            fontSize="small"
-            sx={{ color: 'text.primary' }}
-          />
-          <Typography
-            variant="body1"
-            ml={1}
-            color={'text.primary'}
-            fontWeight={600}
-          >
-            Browse
-          </Typography>
-        </Button>
-      </Link> */}
-
-      <Link to={'/movies'} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <NavLink
+        to={'/movies'}
+        style={{ textDecoration: 'none', color: 'inherit' }}
+        className={({ isActive }) => (isActive ? 'activeLink' : '')}
+      >
         <Button
           aria-label="Show Movie"
           sx={{
@@ -57,7 +31,7 @@ const Header = () => {
             py: 0,
             transition: 'all ease-out 200ms',
             '&:hover': {
-              transform: 'scale(1.10)',
+              transform: 'scale(1.05)',
             },
           }}
         >
@@ -74,9 +48,12 @@ const Header = () => {
             Movie
           </Typography>
         </Button>
-      </Link>
+      </NavLink>
 
-      <Link to={'/tv-shows'}>
+      <NavLink
+        to={'/tv-shows'}
+        className={({ isActive }) => (isActive ? 'activeLink' : '')}
+      >
         <Button
           aria-label="show Tv Shows"
           sx={{
@@ -87,7 +64,7 @@ const Header = () => {
             py: 0,
             transition: 'all ease-out 200ms',
             '&:hover': {
-              transform: 'scale(1.10)',
+              transform: 'scale(1.05)',
             },
           }}
         >
@@ -104,7 +81,7 @@ const Header = () => {
             TvShows
           </Typography>
         </Button>
-      </Link>
+      </NavLink>
 
       {/* <Link to={'/popular'}>
         <Button

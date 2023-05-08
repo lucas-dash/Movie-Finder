@@ -40,6 +40,14 @@ export const tmdbApi = createApi({
     getTvImages: builder.query({
       query: (tvshowId) => `tv/${tvshowId}/images?api_key=${API_KEY}`,
     }),
+    getMoviesByGenre: builder.query({
+      query: (genresId) =>
+        `/discover/movie/?api_key=${API_KEY}&with_genres=${genresId}`,
+    }),
+    getMoviesByGenrePage2: builder.query({
+      query: (genresId) =>
+        `/discover/movie/?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
+    }),
   }),
 });
 
@@ -54,6 +62,8 @@ export const {
   useGetTvTopRatedQuery,
   useGetTvDetailsQuery,
   useGetTvImagesQuery,
+  useGetMoviesByGenreQuery,
+  useGetMoviesByGenrePage2Query,
 } = tmdbApi;
 
 // const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';

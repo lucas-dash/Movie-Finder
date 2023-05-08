@@ -18,13 +18,21 @@ const ListCard = ({ title, img, movieId }) => {
             transform: 'scale(1.10)',
           },
           transition: 'all ease 150ms',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Card variant="elevation" elevation={6} sx={{ maxWidth: 350 }}>
+        <Card
+          variant="elevation"
+          elevation={6}
+          sx={{ maxWidth: 350, borderRadius: 2 }}
+        >
           <CardMedia
             component={'img'}
             image={`https://image.tmdb.org/t/p/w400${img}`}
             alt={title}
+            loading="lazy"
             sx={{
               objectFit: 'cover',
               height: '100%',
