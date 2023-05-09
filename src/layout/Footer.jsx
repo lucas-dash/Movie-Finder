@@ -15,7 +15,7 @@ const Footer = () => {
       <img
         src={footerTheme}
         alt="wawe footer"
-        style={{ margin: 0, padding: 0 }}
+        style={{ margin: 0, padding: 0, position: 'absolute' }}
       />
     </Box>
   );
