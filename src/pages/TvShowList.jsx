@@ -1,6 +1,9 @@
-import { Box } from '@mui/material';
+// components
 import ListSlider from '../components/Lists/ListSlider';
+// RTK Query
 import { useGetTvPopularQuery, useGetTvTopRatedQuery } from '../api/movieApi';
+// MUI
+import { Box } from '@mui/material';
 
 const TvShowList = () => {
   const { data: popularTv, isLoading: popularLoad } = useGetTvPopularQuery();

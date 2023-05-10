@@ -1,10 +1,13 @@
+// components
+import ListSlider from '../components/Lists/ListSlider';
+// RTK Query
 import {
   useGetMoviePopularQuery,
   useGetMoviesTopRatedQuery,
   useGetMoviesUpcomingQuery,
 } from '../api/movieApi';
+// MUI
 import { Box } from '@mui/material';
-import ListSlider from '../components/Lists/ListSlider';
 
 const MovieList = () => {
   const { data: popularMovies, isLoading: popularLoad } =

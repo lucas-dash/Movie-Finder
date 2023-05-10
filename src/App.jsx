@@ -16,13 +16,12 @@ import MovieList from './pages/MovieList';
 import TvShowList from './pages/TvShowList';
 import ListDetails from './components/ListDetails/ListDetails';
 import NotFound from './pages/NotFound';
-import Popular from './components/Popular';
+import Popular from './pages/Popular';
 import MovieGenresList from './components/MovieGenresList';
 import TvshowGenresList from './components/TvshowGenresList';
 
 const App = () => {
   const colorMode = useSelector(selectTheme);
-  // const theme = useTheme(colorMode);
   const theme = useMemo(() => {
     return useTheme(colorMode);
   }, [colorMode]);

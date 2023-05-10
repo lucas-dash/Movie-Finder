@@ -6,17 +6,13 @@ import { Card, Box, Typography, CardMedia } from '@mui/material';
 const ListCard = ({ title, img, movieId }) => {
   const location = useLocation();
 
-  // const path = location.pathname.includes('/tv-shows')
-  //   ? `/tv-shows/${movieId}`
-  //   : `/movies/${movieId}`;
-
   let path;
 
   if (location.pathname.includes('/tv-show-genres')) {
     path = `/tv-shows/${movieId}`;
   } else if (location.pathname.includes('tv-shows')) {
     path = `/tv-shows/${movieId}`;
-  } else if (location.pathname.includes('/movies')) {
+  } else if (location.pathname.includes('/movie')) {
     path = `/movies/${movieId}`;
   }
 

@@ -51,11 +51,11 @@ export const tmdbApi = createApi({
       query: (genresId) =>
         `/discover/movie/?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
     }),
-    getTvByGenre: builder.query({
+    getTvshowsByGenre: builder.query({
       query: (genresId) =>
         `/discover/tv?api_key=${API_KEY}&with_genres=${genresId}`,
     }),
-    getTvByGenrePage2: builder.query({
+    getTvshowsByGenrePage2: builder.query({
       query: (genresId) =>
         `/discover/tv?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
     }),
@@ -75,9 +75,9 @@ export const {
   useGetTvDetailsQuery,
   useGetTvImagesQuery,
   useGetMoviesByGenreQuery,
-  useGetMoviesByGenrePage2Query,
-  useGetTvByGenreQuery,
-  useGetTvByGenrePage2Query,
+  useLazyGetMoviesByGenrePage2Query,
+  useGetTvshowsByGenreQuery,
+  useLazyGetTvshowsByGenrePage2Query,
 } = tmdbApi;
 
 // const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';

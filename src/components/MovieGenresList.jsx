@@ -1,160 +1,111 @@
+// rrd
 import { useParams } from 'react-router-dom';
+// react
+import { useEffect, useState } from 'react';
+// RTK Query
 import {
   useGetMoviesByGenreQuery,
-  useGetMoviesByGenrePage2Query,
+  useLazyGetMoviesByGenrePage2Query,
   useGetMoviesGenresQuery,
 } from '../api/movieApi';
-import { Box, Button, Grid, Skeleton, Stack, Typography } from '@mui/material';
-import ListCard from './Lists/ListCard';
-import { useEffect, useState } from 'react';
+// MUI
+import { Box, Button, Skeleton, Stack, Typography } from '@mui/material';
+// components
+import GridLoading from './loadings/GridLoading';
+import ListGrid from './Lists/ListGrid';
 
 const MovieGenresList = () => {
-  const [load, setLoad] = useState(false);
   const { genreId } = useParams();
+  const [showMore, setShowMore] = useState(false);
 
-  useEffect(() => {
-    setLoad(false);
-  }, [genreId]);
-
+  // genre list 1
   const {
-    data: genreMovie,
-    isLoading: genreLoad,
-    isError: genreErr,
+    data: movieListPage1,
+    isLoading: movieListPage1Load,
+    error: movieListPage1Err,
   } = useGetMoviesByGenreQuery(genreId);
 
-  const { data: genreList, isLoading: genreListLoad } =
-    useGetMoviesGenresQuery();
+  // movie list 2 lazy query
+  const [
+    getMoviePage2,
+    {
+      data: movieListPage2,
+      isLoading: movieListPage2Load,
+      error: movieListPage2Err,
+    },
+  ] = useLazyGetMoviesByGenrePage2Query(genreId);
 
-  const { data: genreListPage2, isLoading: loadPage2 } =
-    useGetMoviesByGenrePage2Query(genreId);
+  // movies genres
+  const {
+    data: genreTitle,
+    isLoading: genreTitleLoad,
+    error: genreTitleErr,
+  } = useGetMoviesGenresQuery();
 
-  const loadMore = () => {
-    setLoad(true);
+  const loadMoreItem = () => {
+    setShowMore(true);
+    getMoviePage2(genreId);
   };
 
-  const titleGenre = genreListLoad
-    ? { name: 'Loading...' }
-    : genreList.genres.find((genre) => {
-        if (genre.id === Number(genreId)) {
-          return genre;
-        }
-      });
+  const titleGenre = genreTitle?.genres.find((genre) => {
+    if (genre.id === Number(genreId)) {
+      return genre;
+    }
+  }).name;
 
-  let content;
-
-  if (load) {
-    content = loadPage2 ? (
-      <>
-        <Grid item xs={10} sm={3} md={3} lg={2} justifyContent={'center'}>
-          <Skeleton variant="rectangular" height={300} width={200} />
-        </Grid>
-        <Grid item xs={10} sm={3} md={3} lg={2} justifyContent={'center'}>
-          <Skeleton variant="rectangular" height={300} width={200} />
-        </Grid>
-        <Grid item xs={10} sm={3} md={3} lg={2} justifyContent={'center'}>
-          <Skeleton variant="rectangular" height={300} width={200} />
-        </Grid>
-      </>
-    ) : (
-      genreListPage2.results.map((movie) => {
-        return (
-          <Grid
-            item
-            key={movie.id}
-            xs={10}
-            sm={3}
-            md={3}
-            lg={2}
-            justifyContent={'center'}
-          >
-            <ListCard
-              title={movie.title}
-              img={movie.poster_path}
-              movieId={movie.id}
-            />
-          </Grid>
-        );
-      })
-    );
-  } else {
-    content = '';
-  }
-
-  if (genreErr) {
-    return (
-      <Modal>
-        <Box>
-          <Typography variant="h5" color={'error'}>
-            Load Page Error
-          </Typography>
-        </Box>
-      </Modal>
-    );
-  }
+  useEffect(() => {
+    setShowMore(false);
+  }, [genreId]);
 
   return (
-    <Box my={3}>
-      <Box>
-        <Typography
-          variant="h5"
-          color={'secondary'}
-          fontWeight={600}
-          ml={2}
-          mb={3}
-        >
-          {`${titleGenre.name} movies`}
-        </Typography>
-      </Box>
-      <Grid container gap={4} justifyContent={'center'}>
-        {genreLoad ? (
-          <>
-            <Grid item xs={10} sm={3} md={3} lg={2} justifyContent={'center'}>
-              <Skeleton variant="rectangular" height={300} width={200} />
-            </Grid>
-            <Grid item xs={10} sm={3} md={3} lg={2} justifyContent={'center'}>
-              <Skeleton variant="rectangular" height={300} width={200} />
-            </Grid>
-            <Grid item xs={10} sm={3} md={3} lg={2} justifyContent={'center'}>
-              <Skeleton variant="rectangular" height={300} width={200} />
-            </Grid>
-          </>
+    <Box my={3} component={'section'}>
+      {genreTitleErr && (
+        <Alert severity="error" sx={{ fontWeight: 600 }}>
+          Failed to load genre name!
+        </Alert>
+      )}
+      <Typography
+        variant="h5"
+        color={'secondary'}
+        fontWeight={600}
+        ml={2}
+        mb={3}
+      >
+        {genreTitleLoad ? (
+          <Skeleton variant="text" width={100} height={30} />
         ) : (
-          genreMovie.results.map((movie) => {
-            return (
-              <Grid
-                item
-                key={movie.id}
-                xs={10}
-                sm={3}
-                md={3}
-                lg={2}
-                justifyContent={'center'}
-              >
-                <ListCard
-                  title={movie.title}
-                  img={movie.poster_path}
-                  movieId={movie.id}
-                />
-              </Grid>
-            );
-          })
+          `${titleGenre} Movies`
         )}
-      </Grid>
+      </Typography>
 
-      {load ? (
-        ''
+      {(movieListPage1Err || movieListPage2Err) && (
+        <Alert severity="error" sx={{ fontWeight: 600 }}>
+          Failded to load movies! Check your network connection!
+        </Alert>
+      )}
+
+      {movieListPage1Load ? (
+        <GridLoading />
       ) : (
+        <ListGrid dataList={movieListPage1} />
+      )}
+
+      {!showMore && (
         <Stack direction={'row'} justifyContent={'center'} my={4}>
-          <Button variant="contained" color="secondary" onClick={loadMore}>
+          <Button variant="contained" color="secondary" onClick={loadMoreItem}>
             <Typography variant="h6" fontWeight={600}>
               Load More
             </Typography>
           </Button>
         </Stack>
       )}
-      <Grid container gap={4} justifyContent={'center'} mt={3}>
-        {content}
-      </Grid>
+
+      {showMore &&
+        (movieListPage2Load ? (
+          <GridLoading />
+        ) : (
+          <ListGrid dataList={movieListPage2} />
+        ))}
     </Box>
   );
 };
