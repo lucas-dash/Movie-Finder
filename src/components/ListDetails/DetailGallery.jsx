@@ -34,6 +34,7 @@ const DetailGallery = ({ loading, images }) => {
       alignItems={'center'}
       maxHeight={'max-content'}
       overflow={'hidden'}
+      component={'section'}
     >
       <Grid item>
         <Card>

@@ -8,6 +8,7 @@ const DetailHeader = ({ title }) => {
       justifyContent={'space-between'}
       alignItems={'center'}
       width={'100%'}
+      component={'header'}
     >
       <Typography variant="h2" ml={3} my={2} fontWeight={500}>
         {title}

@@ -14,7 +14,7 @@ const MovieDetail = ({ release, runtime, revenue, genres, overview }) => {
   });
 
   return (
-    <Box my={2} maxWidth={850} mx={'auto'}>
+    <Box my={2} maxWidth={850} mx={'auto'} component={'article'}>
       <Grid
         container
         spacing={2}
