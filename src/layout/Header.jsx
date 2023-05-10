@@ -15,6 +15,7 @@ const Header = () => {
       my={2}
       mx={{ xs: 0, sm: 5 }}
       justifyContent={{ xs: 'center', sm: 'start' }}
+      component={'section'}
     >
       <NavLink
         to={'/movies'}

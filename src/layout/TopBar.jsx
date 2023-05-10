@@ -16,7 +16,7 @@ import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 import useMediaQuery from '@mui/material/useMediaQuery';
-// features
+// redux
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTheme } from '../features/theme';
 import { toggleTheme } from '../features/theme';

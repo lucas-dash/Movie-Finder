@@ -17,8 +17,8 @@ import TvShowList from './pages/TvShowList';
 import ListDetails from './components/ListDetails/ListDetails';
 import NotFound from './pages/NotFound';
 import Popular from './pages/Popular';
-import MovieGenresList from './components/MovieGenresList';
-import TvshowGenresList from './components/TvshowGenresList';
+import MovieGenresList from './pages/MovieGenresList';
+import TvshowGenresList from './pages/TvshowGenresList';
 
 const App = () => {
   const colorMode = useSelector(selectTheme);

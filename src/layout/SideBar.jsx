@@ -39,7 +39,7 @@ const SideBar = ({ open, close }) => {
 
   return (
     <Drawer open={open} variant="persistent">
-      <Box sx={{ width: '240px' }} color={'secondary.main'}>
+      <Box sx={{ width: '240px' }} color={'secondary.main'} component={'nav'}>
         <Stack
           direction={'row'}
           alignItems={'center'}

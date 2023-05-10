@@ -10,7 +10,7 @@ const TvShowList = () => {
   const { data: topRatedTv, isLoading: topRatedLoad } = useGetTvTopRatedQuery();
 
   return (
-    <Box my={2}>
+    <Box my={2} component={'section'}>
       <ListSlider
         loading={topRatedLoad}
         dataList={topRatedTv?.results}

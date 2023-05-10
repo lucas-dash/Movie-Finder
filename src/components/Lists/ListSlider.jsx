@@ -47,6 +47,7 @@ const ListSlider = ({ loading, dataList, listName }) => {
     <Box
       // sx={{ boxShadow: 'inset 0px 0px 5px lightgray' }}
       my={1}
+      component={'article'}
     >
       <Typography variant="h5" color={'secondary'} fontWeight={600} ml={2}>
         {listName}

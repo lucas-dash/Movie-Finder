@@ -19,7 +19,7 @@ const MovieList = () => {
   const { data: topRatedMovies, isLoading: topRatedLoad } =
     useGetMoviesTopRatedQuery();
   return (
-    <Box my={2}>
+    <Box my={2} component={'section'}>
       <ListSlider
         loading={topRatedLoad}
         dataList={topRatedMovies?.results}

@@ -11,8 +11,8 @@ import {
 // MUI
 import { Alert, Box, Button, Skeleton, Stack, Typography } from '@mui/material';
 // components
-import GridLoading from './loadings/GridLoading';
-import ListGrid from './Lists/ListGrid';
+import GridLoading from '../components/loadings/GridLoading';
+import ListGrid from '../components/Lists/ListGrid';
 
 const TvshowGenresList = () => {
   const { genreId } = useParams();

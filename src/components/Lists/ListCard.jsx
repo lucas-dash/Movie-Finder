@@ -17,7 +17,11 @@ const ListCard = ({ title, img, movieId }) => {
   }
 
   return (
-    <Link to={path} style={{ textDecoration: 'none', color: 'inherit' }}>
+    <Link
+      to={path}
+      style={{ textDecoration: 'none', color: 'inherit' }}
+      aria-label={`Link to ${title}`}
+    >
       <Box
         sx={{
           '&:hover': {
