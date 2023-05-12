@@ -1,16 +1,8 @@
 // MUI
-import {
-  Box,
-  IconButton,
-  InputBase,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { Box, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
@@ -22,6 +14,8 @@ import { selectTheme } from '../features/theme';
 import { toggleTheme } from '../features/theme';
 // rrd
 import { Link, useNavigate } from 'react-router-dom';
+// components
+import SearchBar from '../components/SearchBar';
 
 const TopBar = ({ open }) => {
   const colorMode = useSelector(selectTheme);
@@ -106,26 +100,7 @@ const TopBar = ({ open }) => {
           </Box>
         </Box>
 
-        <Box
-          display={'flex'}
-          borderRadius={'10px'}
-          width={300}
-          sx={{
-            backgroundColor: 'primary.light',
-            boxShadow: '0px 2px 10px #000',
-          }}
-        >
-          <InputBase
-            sx={{
-              flex: 1,
-              ml: 2,
-            }}
-            placeholder="search any movies..."
-          />
-          <IconButton aria-label="search movies" type="button" sx={{ p: 1 }}>
-            <SearchRoundedIcon />
-          </IconButton>
-        </Box>
+        <SearchBar />
 
         <Stack direction={'row'} spacing={0.8} p={1}>
           <Link to="/watchlist">

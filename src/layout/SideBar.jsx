@@ -26,6 +26,7 @@ import { useState } from 'react';
 const SideBar = ({ open, close }) => {
   const navigate = useNavigate();
   const [selectedGenre, setSelectedGenre] = useState('movie');
+
   const { data: movieGenres, isLoading: movieGenreLoad } =
     useGetMoviesGenresQuery();
   const { data: tvGenres, isLoading: tvshowGenreLoad } = useGetTvGenresQuery();
@@ -154,7 +155,32 @@ const SideBar = ({ open, close }) => {
 
           {selectedGenre === 'movie' ? (
             movieGenreLoad ? (
-              <Skeleton variant="text" height={50} width={'100%'} />
+              <>
+                <Skeleton
+                  variant="text"
+                  height={50}
+                  width={'90%'}
+                  sx={{ mx: 'auto' }}
+                />
+                <Skeleton
+                  variant="text"
+                  height={50}
+                  width={'90%'}
+                  sx={{ mx: 'auto' }}
+                />
+                <Skeleton
+                  variant="text"
+                  height={50}
+                  width={'90%'}
+                  sx={{ mx: 'auto' }}
+                />
+                <Skeleton
+                  variant="text"
+                  height={50}
+                  width={'90%'}
+                  sx={{ mx: 'auto' }}
+                />
+              </>
             ) : (
               movieGenres.genres.map((genre) => {
                 return (
@@ -179,7 +205,32 @@ const SideBar = ({ open, close }) => {
               })
             )
           ) : tvshowGenreLoad ? (
-            <Skeleton variant="text" height={50} width={'100%'} />
+            <>
+              <Skeleton
+                variant="text"
+                height={50}
+                width={'90%'}
+                sx={{ mx: 'auto' }}
+              />
+              <Skeleton
+                variant="text"
+                height={50}
+                width={'90%'}
+                sx={{ mx: 'auto' }}
+              />
+              <Skeleton
+                variant="text"
+                height={50}
+                width={'90%'}
+                sx={{ mx: 'auto' }}
+              />
+              <Skeleton
+                variant="text"
+                height={50}
+                width={'90%'}
+                sx={{ mx: 'auto' }}
+              />
+            </>
           ) : (
             tvGenres.genres.map((genre) => {
               return (
