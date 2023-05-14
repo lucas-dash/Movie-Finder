@@ -45,19 +45,22 @@ export const tmdbApi = createApi({
     }),
     getMoviesByGenre: builder.query({
       query: (genresId) =>
-        `/discover/movie/?api_key=${API_KEY}&with_genres=${genresId}`,
+        `discover/movie/?api_key=${API_KEY}&with_genres=${genresId}`,
     }),
     getMoviesByGenrePage2: builder.query({
       query: (genresId) =>
-        `/discover/movie/?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
+        `discover/movie/?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
     }),
     getTvshowsByGenre: builder.query({
       query: (genresId) =>
-        `/discover/tv?api_key=${API_KEY}&with_genres=${genresId}`,
+        `discover/tv?api_key=${API_KEY}&with_genres=${genresId}`,
     }),
     getTvshowsByGenrePage2: builder.query({
       query: (genresId) =>
-        `/discover/tv?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
+        `discover/tv?api_key=${API_KEY}&with_genres=${genresId}&page=2`,
+    }),
+    getSearch: builder.query({
+      query: (name) => `search/movie?api_key=${API_KEY}&query=${name}`,
     }),
   }),
 });
@@ -78,6 +81,7 @@ export const {
   useLazyGetMoviesByGenrePage2Query,
   useGetTvshowsByGenreQuery,
   useLazyGetTvshowsByGenrePage2Query,
+  useLazyGetSearchQuery,
 } = tmdbApi;
 
 // const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';

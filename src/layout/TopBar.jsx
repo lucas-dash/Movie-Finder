@@ -15,7 +15,7 @@ import { toggleTheme } from '../features/theme';
 // rrd
 import { Link, useNavigate } from 'react-router-dom';
 // components
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/Search/SearchBar';
 
 const TopBar = ({ open }) => {
   const colorMode = useSelector(selectTheme);
@@ -100,7 +100,7 @@ const TopBar = ({ open }) => {
           </Box>
         </Box>
 
-        <SearchBar />
+        <SearchBar matches={matches} />
 
         <Stack direction={'row'} spacing={0.8} p={1}>
           <Link to="/watchlist">

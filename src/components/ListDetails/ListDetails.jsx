@@ -42,7 +42,7 @@ const ListDetails = () => {
         {detailsLoad ? (
           <Skeleton variant="text" width={200} height={40} sx={{ ml: 3 }} />
         ) : (
-          <DetailHeader title={details.title} />
+          <DetailHeader title={details?.title} />
         )}
 
         <DetailGallery loading={imagesLoad} images={images} />
@@ -51,16 +51,16 @@ const ListDetails = () => {
           <DetailsLoading />
         ) : (
           <MovieDetail
-            release={details.release_date}
-            runtime={details.runtime}
-            revenue={details.revenue}
-            genres={details.genres}
-            overview={details.overview}
+            release={details?.release_date}
+            runtime={details?.runtime}
+            revenue={details?.revenue}
+            genres={details?.genres}
+            overview={details?.overview}
           />
         )}
       </Box>
     );
-  } else {
+  } else if (location.pathname.includes('/tv-shows')) {
     const { tvshowId } = useParams();
 
     const { data: details, isLoading: detailsLoad } =
@@ -103,6 +103,8 @@ const ListDetails = () => {
         )}
       </Box>
     );
+  } else {
+    throw new Error('No match routes');
   }
 };
 
