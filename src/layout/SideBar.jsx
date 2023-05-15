@@ -14,6 +14,8 @@ import {
   ListItemIcon,
   Button,
   Skeleton,
+  ClickAwayListener,
+  Alert,
 } from '@mui/material';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
@@ -27,9 +29,16 @@ const SideBar = ({ open, close }) => {
   const navigate = useNavigate();
   const [selectedGenre, setSelectedGenre] = useState('movie');
 
-  const { data: movieGenres, isLoading: movieGenreLoad } =
-    useGetMoviesGenresQuery();
-  const { data: tvGenres, isLoading: tvshowGenreLoad } = useGetTvGenresQuery();
+  const {
+    data: movieGenres,
+    isLoading: movieGenreLoad,
+    error: movieErr,
+  } = useGetMoviesGenresQuery();
+  const {
+    data: tvGenres,
+    isLoading: tvshowGenreLoad,
+    error: tvErr,
+  } = useGetTvGenresQuery();
 
   const changeGenreToMovie = () => {
     setSelectedGenre('movie');
@@ -39,7 +48,7 @@ const SideBar = ({ open, close }) => {
   };
 
   return (
-    <Drawer open={open} variant="persistent">
+    <Drawer open={open} variant="persistent" onClose={close(false)}>
       <Box sx={{ width: '240px' }} color={'secondary.main'} component={'nav'}>
         <Stack
           direction={'row'}
@@ -50,12 +59,12 @@ const SideBar = ({ open, close }) => {
           <Typography variant="h4" color={'secondary'} fontWeight={600}>
             Movie Finder
           </Typography>
-          <IconButton aria-label="Close Sidebar" onClick={close}>
+          <IconButton aria-label="Close Sidebar" onClick={close(false)}>
             <ChevronLeftRoundedIcon />
           </IconButton>
         </Stack>
         <Divider />
-        <List>
+        <List onClick={close(false)}>
           <ListItemButton
             onClick={() => {
               navigate('/');
@@ -153,6 +162,10 @@ const SideBar = ({ open, close }) => {
             </Button>
           </Stack>
 
+          {(movieErr || tvErr) && (
+            <Alert variant="error">Failed to load categories!</Alert>
+          )}
+
           {selectedGenre === 'movie' ? (
             movieGenreLoad ? (
               <>
@@ -191,6 +204,7 @@ const SideBar = ({ open, close }) => {
                     key={genre.id}
                   >
                     <ListItemText
+                      onClick={close(false)}
                       primary={
                         <Typography
                           variant="h5"
@@ -241,6 +255,7 @@ const SideBar = ({ open, close }) => {
                   key={genre.id}
                 >
                   <ListItemText
+                    onClick={close(false)}
                     primary={
                       <Typography
                         variant="h5"

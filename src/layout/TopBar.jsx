@@ -28,8 +28,6 @@ const TopBar = ({ open }) => {
 
   const matches = useMediaQuery('(max-width:632px)');
 
-  // search component
-
   return (
     <Box
       position="static"
@@ -48,7 +46,7 @@ const TopBar = ({ open }) => {
           <Tooltip title="Menu">
             <IconButton
               aria-label="show menu"
-              onClick={open}
+              onClick={open(true)}
               sx={{ color: 'secondary.main' }}
             >
               <MenuRoundedIcon fontSize="large" />
