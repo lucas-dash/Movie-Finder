@@ -5,23 +5,11 @@ import { Stack, Box, Skeleton, Typography } from '@mui/material';
 import MovieRoundedIcon from '@mui/icons-material/MovieRounded';
 
 const SearchItem = ({ loading, searchList, handleClick }) => {
-  // const getPath = (result) => {
-  //   const pathType = result.media_type;
-  //   const id = result.id;
-  //   if (pathType === 'movie') {
-  //     return `/movies/${id}`;
-  //   } else if (pathType === 'tv') {
-  //     return `/tv-shows/${id}`;
-  //   } else {
-  //     return '';
-  //   }
-  // };
-
   if (loading) return <Skeleton variant="rounded" width={'90%'} height={50} />;
 
   return (
     <Stack direction={'column'} gap={1} p={1}>
-      {searchList?.slice(0, 5).map((item) => {
+      {searchList?.map((item) => {
         return (
           <Link
             to={`/movies/${item.id}`}

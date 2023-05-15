@@ -57,7 +57,7 @@ const SearchBar = ({ matches }) => {
           value={searchTerm}
           onChange={handleTermChange}
         />
-        <IconButton aria-label="search movies" type="submit" sx={{ p: 1 }}>
+        <IconButton aria-label="search movies" role="img" sx={{ p: 1 }}>
           <SearchRoundedIcon />
         </IconButton>
       </Box>
@@ -66,7 +66,6 @@ const SearchBar = ({ matches }) => {
         <Box
           position={'absolute'}
           display={showDropdown ? 'block' : 'none'}
-          overflow={'scroll'}
           sx={{
             backgroundColor: 'primary.light',
             border: '1px solid',
@@ -77,6 +76,8 @@ const SearchBar = ({ matches }) => {
             top: 65,
             left: matches ? 0 : 50,
             borderRadius: 2,
+            overflowY: 'scroll',
+            overflowX: 'hidden',
           }}
         >
           {searchingErr && (

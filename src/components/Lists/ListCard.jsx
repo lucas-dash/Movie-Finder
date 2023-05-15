@@ -12,7 +12,10 @@ const ListCard = ({ title, img, movieId }) => {
     path = `/tv-shows/${movieId}`;
   } else if (location.pathname.includes('tv-shows')) {
     path = `/tv-shows/${movieId}`;
-  } else if (location.pathname.includes('/movie')) {
+  } else if (
+    location.pathname.includes('/movie') ||
+    location.pathname.includes('popular')
+  ) {
     path = `/movies/${movieId}`;
   }
 
@@ -42,7 +45,6 @@ const ListCard = ({ title, img, movieId }) => {
             component={'img'}
             image={`https://image.tmdb.org/t/p/w400${img}`}
             alt={title}
-            loading="lazy"
             sx={{
               objectFit: 'cover',
               height: '100%',

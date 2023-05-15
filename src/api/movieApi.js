@@ -11,7 +11,7 @@ export const tmdbApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getMoviePopular: builder.query({
-      query: () => `movie/popular?api_key=${API_KEY}`,
+      query: (page) => `movie/popular?api_key=${API_KEY}&page=${page}`,
     }),
     getMoviesGenres: builder.query({
       query: () => `genre/movie/list?api_key=${API_KEY}`,

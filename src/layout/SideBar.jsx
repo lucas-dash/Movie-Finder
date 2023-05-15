@@ -119,6 +119,7 @@ const SideBar = ({ open, close }) => {
             <Button
               aria-label="show movie genre"
               onClick={changeGenreToMovie}
+              variant="contained"
               sx={{
                 borderRadius: 5,
                 p: 0.5,
@@ -141,6 +142,7 @@ const SideBar = ({ open, close }) => {
             <Button
               aria-label="show tv show genre"
               onClick={changeGenreToTv}
+              variant="contained"
               sx={{
                 borderRadius: 5,
                 p: 0.5,

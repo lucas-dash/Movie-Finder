@@ -72,7 +72,6 @@ const DetailGallery = ({ loading, images }) => {
                   <img
                     src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
                     alt={image.iso_639_1}
-                    loading="lazy"
                     style={{
                       objectFit: 'cover',
                       height: '100%',
