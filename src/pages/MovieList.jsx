@@ -11,7 +11,7 @@ import { Box } from '@mui/material';
 
 const MovieList = () => {
   const { data: popularMovies, isLoading: popularLoad } =
-    useGetMoviePopularQuery();
+    useGetMoviePopularQuery(1);
 
   const { data: upcomingMovies, isLoading: upcomingLoad } =
     useGetMoviesUpcomingQuery();

@@ -2,9 +2,12 @@
 import { Box, Alert, Typography, Stack, IconButton } from '@mui/material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+// RTK Query
 import { useGetMoviePopularQuery } from '../api/movieApi';
+// Components
 import GridLoading from '../components/loadings/GridLoading';
 import ListGrid from '../components/Lists/ListGrid';
+// react
 import { useEffect, useState } from 'react';
 
 const Popular = () => {
@@ -95,7 +98,11 @@ const Popular = () => {
         alignItems={'center'}
         gap={1}
       >
-        <IconButton color="secondary" onClick={() => loadPrevious()}>
+        <IconButton
+          color="secondary"
+          onClick={() => loadPrevious()}
+          disabled={disabledPrev}
+        >
           <ArrowBackIosNewRoundedIcon />
         </IconButton>
 
@@ -103,7 +110,11 @@ const Popular = () => {
           Page {page}
         </Typography>
 
-        <IconButton color="secondary" onClick={() => loadNext()}>
+        <IconButton
+          color="secondary"
+          onClick={() => loadNext()}
+          disabled={disabledNext}
+        >
           <ArrowForwardIosRoundedIcon />
         </IconButton>
       </Stack>
