@@ -42,7 +42,7 @@ const ListDetails = () => {
         {detailsLoad ? (
           <Skeleton variant="text" width={200} height={40} sx={{ ml: 3 }} />
         ) : (
-          <DetailHeader title={details?.title} />
+          <DetailHeader title={details?.title} id={details?.id} />
         )}
 
         <DetailGallery loading={imagesLoad} images={images} />

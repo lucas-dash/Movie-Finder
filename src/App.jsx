@@ -19,6 +19,9 @@ import NotFound from './pages/NotFound';
 import Popular from './pages/Popular';
 import MovieGenresList from './pages/MovieGenresList';
 import TvshowGenresList from './pages/TvshowGenresList';
+import Watchlist from './pages/Watchlist';
+import Account from './pages/Account';
+import Login from './pages/Login';
 
 const App = () => {
   const colorMode = useSelector(selectTheme);
@@ -33,13 +36,17 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
 
-          {/* <Route path="watchlist">
-          <Route index element={<WatchList />} />
-        </Route> */}
+          <Route path="watchlist">
+            <Route index element={<Watchlist />} />
+          </Route>
 
-          {/* <Route path="user">
-          <Route index element={<User />} />
-        </Route>  */}
+          <Route path="login">
+            <Route index element={<Login />} />
+          </Route>
+
+          <Route path="account">
+            <Route index element={<Account />} />
+          </Route>
 
           <Route path="movies">
             <Route index element={<MovieList />} />

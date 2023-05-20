@@ -1,5 +1,10 @@
 // rrd
 import { useNavigate } from 'react-router-dom';
+// Redux
+import { useDispatch } from 'react-redux';
+import { setUserLogOutState } from '../features/account/userSlice';
+// react
+import { useState } from 'react';
 // MUI
 import {
   Box,
@@ -21,13 +26,28 @@ import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 // RKT query
 import { useGetMoviesGenresQuery, useGetTvGenresQuery } from '../api/movieApi';
-import { useState } from 'react';
+// Firebase
+import { signOut } from 'firebase/auth';
+import { auth } from '../services/firebase';
 
 const SideBar = ({ open, close }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedGenre, setSelectedGenre] = useState('movie');
+
+  const activeUser = JSON.parse(localStorage.getItem('isAuth'));
+
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(setUserLogOutState());
+      })
+      .then(() => navigate('/'))
+      .catch((err) => alert('Error:' + err.message));
+  };
 
   const {
     data: movieGenres,
@@ -272,6 +292,44 @@ const SideBar = ({ open, close }) => {
             })
           )}
         </List>
+        <Box
+          position={'fixed'}
+          bottom={0}
+          height={45}
+          width={'240px'}
+          sx={{ backgroundColor: 'rgba(40, 40, 40, 0.9)' }}
+          display={'flex'}
+          alignItems={'center'}
+          justifyContent={'start'}
+          pl={1}
+          onClick={close(false)}
+        >
+          {!activeUser ? (
+            <Button
+              variant="text"
+              color="secondary"
+              sx={{ borderRadius: 2 }}
+              onClick={() => navigate('/login')}
+            >
+              <LogoutRoundedIcon />
+              <Typography variant="h6" ml={1}>
+                Sign In
+              </Typography>
+            </Button>
+          ) : (
+            <Button
+              variant="text"
+              color="error"
+              sx={{ borderRadius: 2 }}
+              onClick={() => handleLogOut()}
+            >
+              <LogoutRoundedIcon />
+              <Typography variant="h6" ml={1}>
+                Log Out
+              </Typography>
+            </Button>
+          )}
+        </Box>
       </Box>
     </Drawer>
   );

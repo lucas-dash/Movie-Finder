@@ -137,20 +137,22 @@ const TopBar = ({ open }) => {
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="Account">
-            <IconButton
-              aria-label="Account"
-              onClick={() => {}}
-              sx={{
-                border: '2px solid',
-                borderColor: 'secondary.main',
-                borderRadius: 2,
-                p: 0.5,
-              }}
-            >
-              <PersonRoundedIcon />
-            </IconButton>
-          </Tooltip>
+          <Link to={'/account'}>
+            <Tooltip title="Account">
+              <IconButton
+                aria-label="Account"
+                onClick={() => {}}
+                sx={{
+                  border: '2px solid',
+                  borderColor: 'secondary.main',
+                  borderRadius: 2,
+                  p: 0.5,
+                }}
+              >
+                <PersonRoundedIcon />
+              </IconButton>
+            </Tooltip>
+          </Link>
         </Stack>
       </Stack>
     </Box>
