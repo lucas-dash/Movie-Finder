@@ -25,26 +25,46 @@ const Login = () => {
   const isAuth = JSON.parse(localStorage.getItem('isAuth'));
 
   const [switchForm, setSwitchForm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSignUp = (email, password, name) => {
+    setLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((cred) => {
         const user = cred.user.uid;
-        setDoc(doc(db, 'usersWatchlist', user), { username: name });
+        setDoc(doc(db, 'users', user), { username: name });
       })
       .then(() => {
         dispatch(setActiveUser(email));
       })
-      .then(() => navigate('/'))
-      .catch((err) => console.log(err.message));
+      .then(() => {
+        navigate('/');
+        setLoading(false);
+        setError('');
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setLoading(false);
+        setError('Weak password or invalid email!');
+      });
   };
 
   const handleSignIn = (email, password) => {
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((cred) => console.log(cred.user.uid))
       .then(() => dispatch(setActiveUser(email)))
-      .then(() => navigate('/'))
-      .catch((err) => console.log(err.message));
+      .then(() => {
+        navigate('/');
+        setError('');
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setLoading(false);
+        setError('Wrong password or invalid email!');
+      });
   };
 
   useEffect(() => {
@@ -75,9 +95,9 @@ const Login = () => {
         </Box>
 
         {switchForm ? (
-          <Register signUp={handleSignUp} />
+          <Register signUp={handleSignUp} error={error} loading={loading} />
         ) : (
-          <SignIn signIn={handleSignIn} />
+          <SignIn signIn={handleSignIn} error={error} loading={loading} />
         )}
       </Container>
     </Box>

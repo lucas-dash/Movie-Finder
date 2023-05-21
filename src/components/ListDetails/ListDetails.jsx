@@ -42,7 +42,12 @@ const ListDetails = () => {
         {detailsLoad ? (
           <Skeleton variant="text" width={200} height={40} sx={{ ml: 3 }} />
         ) : (
-          <DetailHeader title={details?.title} id={details?.id} />
+          <DetailHeader
+            title={details?.title}
+            id={details?.id}
+            imgPath={details?.backdrop_path}
+            type={'movies'}
+          />
         )}
 
         <DetailGallery loading={imagesLoad} images={images} />
@@ -67,7 +72,6 @@ const ListDetails = () => {
       useGetTvDetailsQuery(tvshowId);
     const { data: images, isLoading: imagesLoad } =
       useGetTvImagesQuery(tvshowId);
-
     return (
       <Box
         sx={{
@@ -84,7 +88,12 @@ const ListDetails = () => {
         {detailsLoad ? (
           <Skeleton variant="text" width={200} height={40} sx={{ ml: 3 }} />
         ) : (
-          <DetailHeader title={details.name} />
+          <DetailHeader
+            title={details?.name}
+            id={details?.id}
+            imgPath={details?.backdrop_path}
+            type={'tv-shows'}
+          />
         )}
         <DetailGallery loading={imagesLoad} images={images} />
 

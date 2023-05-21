@@ -5,8 +5,8 @@ import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded
 import { auth, db } from '../../services/firebase';
 import { arrayUnion, doc, setDoc } from 'firebase/firestore';
 
-const DetailHeader = ({ title, id }) => {
-  const addToWatchlist = async (movieId, movieTitle) => {
+const DetailHeader = ({ title, id, imgPath, type }) => {
+  const addToWatchlist = async (movieId, movieTitle, img) => {
     if (!auth?.currentUser) {
       alert('You must be sign In!');
       return;
@@ -14,18 +14,20 @@ const DetailHeader = ({ title, id }) => {
 
     try {
       const user = auth?.currentUser?.uid;
-      console.log(user);
 
       await setDoc(
-        doc(db, 'usersWatchlist', user),
+        doc(db, 'users', user),
         {
-          movies: arrayUnion({
+          watchlist: arrayUnion({
             id: movieId,
             title: movieTitle,
+            imgPath: img,
+            type: type,
           }),
         },
         { merge: true }
       );
+      console.log('add to watchlist');
     } catch (err) {
       console.log(err.message);
     }
@@ -46,7 +48,7 @@ const DetailHeader = ({ title, id }) => {
         <Tooltip title="Watchlist">
           <IconButton
             aria-label="add to watchlist"
-            onClick={() => addToWatchlist(id, title)}
+            onClick={() => addToWatchlist(id, title, imgPath)}
             sx={{
               border: '2px solid',
               borderColor: 'secondary.main',

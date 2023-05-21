@@ -16,7 +16,7 @@ const Account = () => {
     const getUsername = async () => {
       try {
         const user = auth?.currentUser?.uid;
-        const data = doc(db, 'usersWatchlist', user);
+        const data = doc(db, 'users', user);
         const documentSnapshot = await getDoc(data);
         if (documentSnapshot.exists()) {
           const userName = documentSnapshot.data().username;

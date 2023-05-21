@@ -1,9 +1,16 @@
 // MUI
-import { Box, Button, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Alert,
+  Typography,
+} from '@mui/material';
 // react
 import { useState } from 'react';
 
-const SignIn = ({ signIn }) => {
+const SignIn = ({ signIn, error, loading }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -53,13 +60,15 @@ const SignIn = ({ signIn }) => {
           required
         />
 
+        {error ? <Alert severity="error">{error}</Alert> : ''}
+
         <Button
           variant="contained"
           color="secondary"
           type="submit"
           onClick={(e) => signInSubmit(e)}
         >
-          Sign In
+          {loading ? <CircularProgress /> : 'Sign In'}
         </Button>
       </Box>
     </Box>

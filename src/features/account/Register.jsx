@@ -1,10 +1,17 @@
 // MUI
-import { Box, Button, TextField, Typography } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+} from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 // react
 import { useState } from 'react';
 
-const Register = ({ signUp }) => {
+const Register = ({ signUp, error, loading }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -66,6 +73,8 @@ const Register = ({ signUp }) => {
           required
         />
 
+        {error ? <Alert severity="error">{error}</Alert> : ''}
+
         <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
           <Button variant="outlined" color="secondary">
             <GoogleIcon />
@@ -81,6 +90,7 @@ const Register = ({ signUp }) => {
           type="submit"
           onClick={(e) => handleSubmit(e)}
         >
+          {loading ? <CircularProgress /> : 'Register'}
           Register
         </Button>
       </Box>
