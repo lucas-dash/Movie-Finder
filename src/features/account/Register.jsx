@@ -90,8 +90,7 @@ const Register = ({ signUp, error, loading }) => {
           type="submit"
           onClick={(e) => handleSubmit(e)}
         >
-          {loading ? <CircularProgress /> : 'Register'}
-          Register
+          {loading ? <CircularProgress /> : 'Sign Up'}
         </Button>
       </Box>
     </Box>

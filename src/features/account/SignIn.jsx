@@ -7,6 +7,7 @@ import {
   Alert,
   Typography,
 } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
 // react
 import { useState } from 'react';
 
@@ -40,7 +41,7 @@ const SignIn = ({ signIn, error, loading }) => {
         component={'form'}
         sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
       >
-        <Typography variant="h5">Sign In</Typography>
+        <Typography variant="h5">Log In</Typography>
         <TextField
           variant="outlined"
           color="secondary"
@@ -61,6 +62,15 @@ const SignIn = ({ signIn, error, loading }) => {
         />
 
         {error ? <Alert severity="error">{error}</Alert> : ''}
+
+        <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+          <Button variant="outlined" color="secondary">
+            <GoogleIcon />
+            <Typography variant="h6" ml={1}>
+              Log In with Google!
+            </Typography>
+          </Button>
+        </Box>
 
         <Button
           variant="contained"

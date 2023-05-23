@@ -10,13 +10,13 @@ import { setActiveUser, selectUserEmail } from '../features/account/userSlice';
 import { useEffect, useState } from 'react';
 // firebase
 import { auth, db } from '../services/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 // rrd
 import { useNavigate, Navigate } from 'react-router-dom';
-import { doc, setDoc } from 'firebase/firestore';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -86,7 +86,7 @@ const Login = () => {
             onClick={() => setSwitchForm(true)}
           />
           <Chip
-            label="Sign In"
+            label="Log In"
             color="secondary"
             variant={!switchForm ? 'filled' : 'outlined'}
             sx={{ fontSize: 14 }}
