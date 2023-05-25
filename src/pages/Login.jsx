@@ -10,7 +10,7 @@ import { setActiveUser } from '../features/account/userSlice';
 import { useState } from 'react';
 // firebase
 import { auth, db, googleProvider } from '../services/firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -73,8 +73,15 @@ const Login = () => {
       .then((cred) => {
         console.log(cred);
         const user = cred?.user?.uid;
-        setDoc(doc(db, 'users', user), { username: cred.user.displayName });
-        dispatch(setActiveUser(cred?.user?.displayName));
+        const userData = doc(db, 'users', user);
+        if (cred.user.emailVerified) {
+          dispatch(setActiveUser(cred?.user?.displayName));
+        } else {
+          setDoc(userData, {
+            username: cred.user.displayName,
+          });
+          dispatch(setActiveUser(cred?.user?.displayName));
+        }
       })
       .then(() => {
         navigate('/');

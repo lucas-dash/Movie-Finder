@@ -51,6 +51,7 @@ const Account = () => {
             if (snapshot.exists()) {
               const userCollection = snapshot.data();
               dispatch(setActiveUser(userCollection?.username));
+              // dispatch(setActiveUser(snapshot.))
             }
           },
           (err) => console.log(err.message)
