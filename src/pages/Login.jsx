@@ -4,16 +4,17 @@ import { Box, Container, Chip } from '@mui/material';
 import Register from '../features/account/Register';
 import SignIn from '../features/account/SignIn';
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { setActiveUser, selectUserEmail } from '../features/account/userSlice';
+import { useDispatch } from 'react-redux';
+import { setActiveUser } from '../features/account/userSlice';
 // react
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // firebase
-import { auth, db } from '../services/firebase';
+import { auth, db, googleProvider } from '../services/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from 'firebase/auth';
 // rrd
 import { useNavigate, Navigate } from 'react-router-dom';
@@ -21,7 +22,6 @@ import { useNavigate, Navigate } from 'react-router-dom';
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector(selectUserEmail);
   const isAuth = JSON.parse(localStorage.getItem('isAuth'));
 
   const [switchForm, setSwitchForm] = useState(false);
@@ -36,7 +36,7 @@ const Login = () => {
         setDoc(doc(db, 'users', user), { username: name });
       })
       .then(() => {
-        dispatch(setActiveUser(email));
+        dispatch(setActiveUser(name));
       })
       .then(() => {
         navigate('/');
@@ -53,8 +53,8 @@ const Login = () => {
   const handleSignIn = (email, password) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((cred) => console.log(cred.user.uid))
-      .then(() => dispatch(setActiveUser(email)))
+      .then((cred) => console.log(cred.user.email))
+      .then(() => dispatch(setActiveUser()))
       .then(() => {
         navigate('/');
         setError('');
@@ -67,10 +67,26 @@ const Login = () => {
       });
   };
 
-  useEffect(() => {
-    console.log(auth?.currentUser?.email);
-    console.log(user);
-  }, []);
+  const handleSignInWithGoogle = () => {
+    setLoading(true);
+    signInWithPopup(auth, googleProvider)
+      .then((cred) => {
+        console.log(cred);
+        const user = cred?.user?.uid;
+        setDoc(doc(db, 'users', user), { username: cred.user.displayName });
+        dispatch(setActiveUser(cred?.user?.displayName));
+      })
+      .then(() => {
+        navigate('/');
+        setLoading(false);
+        setError('');
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        setError('Something goes wrong with google auth.');
+      });
+  };
 
   if (isAuth) return <Navigate to={'/account'} />;
 
@@ -95,9 +111,19 @@ const Login = () => {
         </Box>
 
         {switchForm ? (
-          <Register signUp={handleSignUp} error={error} loading={loading} />
+          <Register
+            signUp={handleSignUp}
+            signUpGoogle={handleSignInWithGoogle}
+            error={error}
+            loading={loading}
+          />
         ) : (
-          <SignIn signIn={handleSignIn} error={error} loading={loading} />
+          <SignIn
+            signIn={handleSignIn}
+            signInGoogle={handleSignInWithGoogle}
+            error={error}
+            loading={loading}
+          />
         )}
       </Container>
     </Box>

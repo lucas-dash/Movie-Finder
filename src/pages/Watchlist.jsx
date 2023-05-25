@@ -50,18 +50,17 @@ const Watchlist = () => {
   };
 
   useEffect(() => {
-    let unsubscribe;
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const user = auth?.currentUser?.uid;
-        const userData = doc(db, 'users', user);
+        const userData = doc(db, 'users', user.uid);
 
-        unsubscribe = onSnapshot(
+        onSnapshot(
           userData,
           (snapshot) => {
             if (snapshot.exists()) {
               const documentData = snapshot.data();
-              if (documentData.watchlist.length) {
+              console.log(documentData);
+              if (documentData.watchlist && documentData.watchlist.length) {
                 setError(false);
                 setLoading(true);
                 setList(documentData);
@@ -84,17 +83,20 @@ const Watchlist = () => {
         return;
       }
     });
-
-    return () => unsubscribe();
   }, []);
 
   if (!isAuth)
     return (
       <div style={{ textAlign: 'center' }}>
-        <Button variant="outlined" color={'secondary'}>
+        <Button
+          variant="outlined"
+          color={'secondary'}
+          aria-label="Sign In to use the watchlist"
+        >
           <Link
             to={'/login'}
             style={{ textDecoration: 'none', color: 'inherit' }}
+            aria-label="switch to the login page"
           >
             Sign In to use the watchlist!
           </Link>

@@ -51,9 +51,11 @@ const DetailHeader = ({ title, id, imgPath, type }) => {
             (snapshot) => {
               if (snapshot.exists()) {
                 const userList = snapshot.data();
-                setInWatchlist(
-                  userList.watchlist.some((item) => item.id === id)
-                );
+                if (userList.watchlist) {
+                  setInWatchlist(
+                    userList?.watchlist.some((item) => item.id === id)
+                  );
+                }
               } else {
                 console.log('Empty watchlist');
               }

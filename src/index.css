@@ -10,12 +10,11 @@ body,
 }
 body {
   background-color: #0099ff;
-}
-
-body {
   transition: all ease-in 300ms;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 .activeLink {
   background-color: #0ea5e9;
   border-radius: 50px;

@@ -46,7 +46,7 @@ const Popular = () => {
   }, [page]);
 
   return (
-    <Box my={3} component={'section'}>
+    <Box mt={3} mb={10} component={'section'}>
       <Typography
         variant="h5"
         color={'secondary'}

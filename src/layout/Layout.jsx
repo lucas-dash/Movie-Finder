@@ -22,7 +22,7 @@ const Layout = () => {
       <TopBar open={toggleSideBar} />
       <Header />
       <SideBar open={open} close={toggleSideBar} />
-      <main>
+      <main style={{ paddingBottom: 10 }}>
         <Outlet />
       </main>
       <Footer />

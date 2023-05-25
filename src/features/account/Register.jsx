@@ -11,7 +11,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 // react
 import { useState } from 'react';
 
-const Register = ({ signUp, error, loading }) => {
+const Register = ({ signUp, error, loading, signUpGoogle }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -76,7 +76,11 @@ const Register = ({ signUp, error, loading }) => {
         {error ? <Alert severity="error">{error}</Alert> : ''}
 
         <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
-          <Button variant="outlined" color="secondary">
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => signUpGoogle()}
+          >
             <GoogleIcon />
             <Typography variant="h6" ml={1}>
               Sign Up with Google!

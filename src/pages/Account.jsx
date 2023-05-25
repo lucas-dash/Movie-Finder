@@ -1,34 +1,64 @@
 // rrd
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+// react
+import { useEffect } from 'react';
 // Redux
-import { useSelector } from 'react-redux';
-import { selectUserEmail } from '../features/account/userSlice';
-import { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectUserName,
+  setActiveUser,
+  setUserLogOutState,
+} from '../features/account/userSlice';
+// firebase
+import { doc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
+import { deleteUser, onAuthStateChanged } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
+// components
+import User from '../features/account/User';
 
 const Account = () => {
-  const userEmail = useSelector(selectUserEmail);
+  const userName = useSelector(selectUserName);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const isAuth = JSON.parse(localStorage.getItem('isAuth'));
-  const [userName, setUserName] = useState('');
+
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(setUserLogOutState());
+      })
+      .then(() => navigate('/'))
+      .catch((err) => alert('Error:' + err.message));
+  };
+
+  const deleteAccount = () => {
+    deleteUser(auth?.currentUser?.uid)
+      .then(() => dispatch(setUserLogOutState()))
+      .then(() => navigate('/'))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
-    const getUsername = async () => {
-      try {
-        const user = auth?.currentUser?.uid;
-        const data = doc(db, 'users', user);
-        const documentSnapshot = await getDoc(data);
-        if (documentSnapshot.exists()) {
-          const userName = documentSnapshot.data().username;
-          setUserName(userName);
-        } else {
-          console.log('document does not exist!');
-        }
-      } catch (err) {
-        console.log(err.message);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userData = doc(db, 'users', user.uid);
+
+        onSnapshot(
+          userData,
+          (snapshot) => {
+            if (snapshot.exists()) {
+              const userCollection = snapshot.data();
+              dispatch(setActiveUser(userCollection?.username));
+            }
+          },
+          (err) => console.log(err.message)
+        );
+      } else {
+        return;
       }
-    };
-    getUsername();
+    });
   }, []);
 
   // if no user show signIn form or log in
@@ -37,8 +67,7 @@ const Account = () => {
   // if user login show account info
   return (
     <div>
-      <h2>User: {userEmail}</h2>
-      <h2>Username: {userName}</h2>
+      <User username={userName} logout={handleLogOut} delUser={deleteAccount} />
     </div>
   );
 };
