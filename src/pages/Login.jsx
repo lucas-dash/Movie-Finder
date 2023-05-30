@@ -10,7 +10,7 @@ import { setActiveUser } from '../features/account/userSlice';
 import { useState } from 'react';
 // firebase
 import { auth, db, googleProvider } from '../services/firebase';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
