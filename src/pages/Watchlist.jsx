@@ -59,7 +59,6 @@ const Watchlist = () => {
           (snapshot) => {
             if (snapshot.exists()) {
               const documentData = snapshot.data();
-              console.log(documentData);
               if (documentData.watchlist && documentData.watchlist.length) {
                 setError(false);
                 setLoading(true);

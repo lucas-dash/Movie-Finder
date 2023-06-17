@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 // MUI
 import { Card, Box, Typography, CardMedia } from '@mui/material';
 
-const ListCard = ({ title, img, movieId }) => {
+const ListCard = ({ title, img, movieId, type }) => {
   const location = useLocation();
 
   let path;
@@ -17,6 +17,12 @@ const ListCard = ({ title, img, movieId }) => {
     location.pathname.includes('popular')
   ) {
     path = `/movies/${movieId}`;
+  }
+
+  if (type === 'movie') {
+    path = `/movies/${movieId}`;
+  } else if (type === 'tvshow') {
+    path = `/tv-shows/${movieId}`;
   }
 
   return (

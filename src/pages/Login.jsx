@@ -53,7 +53,6 @@ const Login = () => {
   const handleSignIn = (email, password) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((cred) => console.log(cred.user.email))
       .then(() => dispatch(setActiveUser()))
       .then(() => {
         navigate('/');

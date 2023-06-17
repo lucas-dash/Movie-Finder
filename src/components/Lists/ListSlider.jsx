@@ -66,6 +66,7 @@ const ListSlider = ({ loading, dataList, listName }) => {
                   title={title}
                   img={movie.poster_path}
                   movieId={movie.id}
+                  type={movie.title ? 'movie' : 'tvshow'}
                 />
               );
             })

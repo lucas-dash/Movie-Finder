@@ -67,7 +67,11 @@ const DetailHeader = ({ title, id, imgPath, type }) => {
       (err) => console.log(err)
     );
 
-    return () => unsubscribe();
+    return () => {
+      if (unsubscribe && typeof unsubscribe === 'function') {
+        unsubscribe();
+      }
+    };
   }, []);
 
   return (
